@@ -22,10 +22,13 @@ This is a web application built with **FastAPI** that analyzes the writing syste
 * **APIs:** AniList (GraphQL), Jisho.org (REST)
 
 ## Preview
+Home page
 
-![]()
-![]()
+![Home page](homepage.png)
 
+Results page for Mecha anime 1970-2024
+
+![Results page](resultspage.png)
 
 
 ## Installation & Setup
