@@ -1,0 +1,51 @@
+<h2>Statystyki lingwistyczne oryginalnych tytułów anime (Razem: {{ stats.total }})</h2>
+<h3>Gatunek: {{genre}}, lata {{start_year}}-{{end_year}}</h3>
+<a>Najbardziej popularne anime: {{top_title}}</a>
+<br>
+<a>Liczba anime z tytułów złożonych z: </a>
+<ul>
+    {% if stats.total > 0 %}
+        <li>Samej hiragany: {{ stats.hiragana }} ({{ (stats.hiragana / stats.total * 100)|round(1) }}%)</li>
+        <li>Samej katakany: {{ stats.katakana }} ({{ (stats.katakana / stats.total * 100)|round(1) }}%)</li>
+        <li>Samego kanji: {{ stats.kanji }} ({{ (stats.kanji / stats.total * 100)|round(1) }}%)</li>
+        <li>Mieszane (sam japoński - hira/katakana, kanji): {{ stats.mixed }} ({{ (stats.mixed / stats.total * 100)|round(1) }}%)</li>
+        <li>Inne/Brak: {{ stats.other + stats.none }} ({{ (stats.other / stats.total * 100)|round(1) }}%)</li>
+        {% else %}
+        <li>Brak danych do obliczenia procentów.</li>
+    {% endif %}
+</ul>
+
+<hr>
+
+<h2>Najpopularniejsze znaki Kanji</h2>
+<table border="1" style="width: 100%; border-collapse: collapse;">
+    <thead style="background-color: #f2f2f2;">
+        <tr>
+            <th>Znak</th>
+            <th>Wystąpienia</th>
+            <th>Główne info</th>
+            <th>Przykładowe słówka</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for k in kanji_results %}
+        <tr>
+            <td style="font-size: 40px; text-align: center; width: 100px;">{{ k.char }}</td>
+            <td style="text-align: center;">{{ k.count }}</td>
+            <td>
+                <strong>Czytanie:</strong> {{ k.reading }}<br>
+                <strong>Znaczenie:</strong> {{ k.main_meaning }}
+            </td>
+            <td>
+                <ul style="margin: 5px 0;">
+                {% for word in k.words %}
+                    <li>{{ word }}</li>
+                {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<a href="/">Powrót</a>
